@@ -10,33 +10,42 @@ def menu(container: list, r: int) -> None:
             print(c + ' | ', end='') 
         print('\n-----------')
         cont += 1 
-    print(f"Jogadas: {r}")
+    print(f"Round: {r}")
 
 def cpu(matriz: list) -> None:
+    cont = 0
     playCpu_cell = randrange(0, len(matriz))
     playCpu_c = randrange(0, len(matriz[playCpu_cell])) 
     while True:
-        if matriz[playCpu_cell][playCpu_c] != 'X': 
+        if matriz[playCpu_cell][playCpu_c] == '': 
             matriz[playCpu_cell][playCpu_c] = 'X' 
-            return True
+            break
         else: 
             playCpu_cell = randrange(0, len(matriz))
-            playCpu_c = randrange(0, len(matriz[playCpu_cell]))
+            playCpu_c = randrange(0, len(matriz[playCpu_cell])) 
+            cont += 1 
+        if cont > 10: 
+            break
+    return True
     
 
 def player(matriz: list) -> None: 
     line = int(input('Line: ')) 
     column = int(input('Column: ')) 
     while True:
-        if matriz[line][column] != 'X':
+        if matriz[line][column] == '':
             matriz[line][column] = 'O' 
-            return True
+            break
         else: 
-            line = int(input('Line: ')) 
-            column = int(input('Column: ')) 
+            return False 
+    return True
 
 def end(matriz: list) -> bool: 
+    cont = 0
     for cell in matriz: 
-        if all(cell) != '': 
-            return True 
+        for c in cell:
+            if c != '': 
+                cont += 1
+    if cont == 9: 
+        return True 
     return False

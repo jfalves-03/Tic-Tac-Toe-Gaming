@@ -15,17 +15,14 @@ round = 1
 while True: 
     system('cls') 
     menu(matriz, round) 
-    sit_cpu = cpu(matriz)
-    sit_player = player(matriz) 
-    if sit_cpu is True:
-        round += 1 
-        system('cls') 
-        menu(matriz, round)
-    if sit_player is True: 
-        round += 1 
-        menu(matriz, round)
     fim = end(matriz) 
-    if fim: 
+    if fim:
         break
+    sit_player = player(matriz) 
+    if sit_player is True: 
+        sit_cpu = cpu(matriz) 
+        round += 1 
+    else: 
+        continue
     sleep(1) 
 
